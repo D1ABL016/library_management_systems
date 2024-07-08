@@ -30,10 +30,10 @@ module.exports = (sequelize, DataTypes, Model) => {
         added_date: {
             type: DataTypes.DATE,
             allowNull: false,
-            default: DataTypes.NOW
+            defaultValue: DataTypes.NOW
         },
         added_book: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.STRING,
             allowNull: false
         }
     },
