@@ -21,7 +21,8 @@ db.issueBook = require('./issueBook')(sequelize,DataTypes,Model);
 
 
 
-db.sequelize.sync({alter:true});
+// db.sequelize.sync({alter:true});
 // db.sequelize.sync({force:true});
+db.sequelize.sync();
 
 module.exports = db;

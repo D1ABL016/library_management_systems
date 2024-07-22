@@ -7,10 +7,10 @@ let add_book =db.addBook
 
 const getbook = async (req, res) => {
     try {
-        const data = await book.findAll({
-            attributes: { exclude: ['book_id'] },
+        // console.log("book name => ",req.params.bookname)
+        const data = await book.findAll({            
             where: {
-                book_id: req.params.bookid
+                book_name: req.params.bookname
             }
         });
 
@@ -44,7 +44,7 @@ const getbook = async (req, res) => {
     } catch (error) {
         switch (error) {
             case 400:
-                res.status(400).send("invalid id")
+                res.status(400).send("No book with specified name")
                 break
             default:
                 res.status(404).send({ "error": error })
@@ -61,10 +61,10 @@ const postbook = async (req, res) => {
             avialiable_units: req.body.avialiable_units
         })
         if(addedbook){
-            let username = "lakshay"
+            // let username = "lakshay"
             let response = await add_book.create({
                 book_id:addedbook.book_id,
-                added_by:username,
+                added_by:req.user.id,
                 added_units:addedbook.avialiable_units,                
                 added_book:addedbook.book_name
             })
@@ -95,6 +95,7 @@ const deletebook = async (req, res) => {
 
 const issuebook = async (req, res) => {
     try {
+
         let adminname = "iamadmin"
         let adminid = 1212
         let issuedbook = await issue_book.create({
